@@ -1,126 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For Someone Special ❤️</title>
+<title>For My Valentine ❤️</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-        }
+.container {
+  margin-top: 100px;
+}
 
-        .container {
-            position: relative;
-            top: 20%;
-        }
+h1 {
+  font-size: 40px;
+  animation: glow 2s infinite alternate;
+}
 
-        h1 {
-            font-size: 2.2em;
-        }
+@keyframes glow {
+  from { text-shadow: 0 0 10px white; }
+  to { text-shadow: 0 0 20px red; }
+}
 
-        #text {
-            font-size: 1.3em;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 450px;
-            min-height: 50px;
-        }
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 15px;
+  transition: 0.3s;
+}
 
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
-            background: white;
-            color: #ff4d6d;
-            cursor: pointer;
-            margin: 10px;
-        }
+#yes {
+  background-color: white;
+  color: #ff4b6e;
+}
 
-        button:hover {
-            background: #ffe0e6;
-        }
+#no {
+  background-color: #ff4b6e;
+  color: white;
+  position: absolute;
+}
 
-        /* Floating hearts */
-        .heart {
-            position: absolute;
-            bottom: -20px;
-            font-size: 20px;
-            animation: float 6s linear infinite;
-        }
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  animation: float 5s linear infinite;
+}
 
-        @keyframes float {
-            from {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>Happy Valentine’s Day ❤️</h1>
-    <div id="text"></div>
-
-    <button onclick="nextMessage()">Press this (important 😌)</button>
+  <h1>Will You Be My Valentine? 💖</h1>
+  <button id="yes" onclick="yesClicked()">Yes 💍</button>
+  <button id="no" onmouseover="moveButton()">No 🙈</button>
 </div>
 
 <script>
-let messages = [
-    "I was thinking what to gift you…",
-    "Flowers? Too normal.",
-    "Chocolate? You’re already sweet enough 😏",
-    "Then I realized… the best gift is reminding you how special you are.",
-    "Also… you're stuck with me now. No return policy 😂",
-    "Seriously though… I love you a lot ❤️"
-];
-
-let msgIndex = 0;
-let charIndex = 0;
-
-function typeWriter() {
-    if (charIndex < messages[msgIndex].length) {
-        document.getElementById("text").innerHTML += messages[msgIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 40);
-    }
+function moveButton() {
+  var button = document.getElementById("no");
+  button.style.top = Math.random() * window.innerHeight + "px";
+  button.style.left = Math.random() * window.innerWidth + "px";
 }
 
-function nextMessage() {
-    document.getElementById("text").innerHTML = "";
-    charIndex = 0;
-    msgIndex = (msgIndex + 1) % messages.length;
-    typeWriter();
+function yesClicked() {
+  document.body.innerHTML = `
+  <div style="margin-top:150px;">
+    <h1>I Knew It! 😍❤️</h1>
+    <h2>You Just Made Me The Happiest Person Alive 💖</h2>
+    <p style="font-size:20px;">Forever & Always 🌹</p>
+  </div>
+  `;
+  startHearts();
 }
 
-// Start first message
-typeWriter();
-
-// Floating hearts generator
-setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
+function startHearts() {
+  setInterval(function() {
+    var heart = document.createElement("div");
+    heart.classList.add("heart");
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 6000);
-}, 400);
+    setTimeout(function() {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
 </script>
 
 </body>
