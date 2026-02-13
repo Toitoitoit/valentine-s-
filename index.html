@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Someone Special ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            top: 20%;
+        }
+
+        h1 {
+            font-size: 2.2em;
+        }
+
+        #text {
+            font-size: 1.3em;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 450px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            background: white;
+            color: #ff4d6d;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #ffe0e6;
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Happy Valentine’s Day ❤️</h1>
+    <div id="text"></div>
+
+    <button onclick="nextMessage()">Press this (important 😌)</button>
+</div>
+
+<script>
+let messages = [
+    "I was thinking what to gift you…",
+    "Flowers? Too normal.",
+    "Chocolate? You’re already sweet enough 😏",
+    "Then I realized… the best gift is reminding you how special you are.",
+    "Also… you're stuck with me now. No return policy 😂",
+    "Seriously though… I love you a lot ❤️"
+];
+
+let msgIndex = 0;
+let charIndex = 0;
+
+function typeWriter() {
+    if (charIndex < messages[msgIndex].length) {
+        document.getElementById("text").innerHTML += messages[msgIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 40);
+    }
+}
+
+function nextMessage() {
+    document.getElementById("text").innerHTML = "";
+    charIndex = 0;
+    msgIndex = (msgIndex + 1) % messages.length;
+    typeWriter();
+}
+
+// Start first message
+typeWriter();
+
+// Floating hearts generator
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+</script>
+
+</body>
+</html>
